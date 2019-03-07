@@ -1,0 +1,18 @@
+Runhao Liang, Yang Wang
+liangru3, wangya62
+
+
+fifo.c
+In fifo.c, I (Runhao Liang) set evict_i to be -1 initially. So when fifo_evict() is called, the value of evict_i will be increased to at least 0. I also use % operation to make sure that evict_i is always between 0 and (memorize - 1).
+
+My teammate, Yang Wang, also writes another version. She sets evict_i to be 0 at first and uses if-condiction to ensure that evict_i is always a valid int. Her version contains more codes, but is easier to understand. My version might be confusing at first, but requires fewer codes. We finally choose to use my version and write in the INFO.txt to clarify why we choose it.
+
+
+tree.c
+In this program, we create a 5-level binary tree. This sample is relatively smaller to the 3 other programs, so the data in the tables does not change when the memory size increases from 150 to 200. If we have more time, we will create another function to insert new nodes into a tree recursively.
+
+
+opt.c
+This program is not fully completed. It can only generate results when the input trace file is small, such as tr-tree.ref and tr-simpleloop.ref. We are not sure how long it will take when the input trace file is large, such as tr-matmul.ref.
+
+We intend to use linked list to implement this algorithm, where we store each formatted line in the input trace file as a node in the linked list.  The linked list is initialized such that every node has a ¡°data¡± and a ¡°pointer¡± pointing to the next node. We store the virtual address as ¡°data.¡± So when the opt_evict() is called, a helper function will determine the period of a virtual address between its last reference time and its next show up. The node with the longest period is considered as the furthest used node in the future, and we return the index of such node and evict the corresponding page.
